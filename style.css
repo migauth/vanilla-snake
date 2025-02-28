@@ -1,0 +1,14 @@
+body {
+  background-color: black;
+  height: 100vh;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-board {
+  background-color: lightgrey;
+  width: 500px;
+  height: 500px;
+}
