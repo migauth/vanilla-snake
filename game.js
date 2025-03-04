@@ -12,52 +12,60 @@
  * - food
  * - game over
  * - points
- * - 
+ * -
  */
 
-const gameBoard = document.getElementById("game-board");
-const context = gameBoard.getContext("2d");
+// basic game stuff
 
-context.fillStyle = 'purple'
+const GAMEBOARD = document.getElementById("game-board");
+const CONTEXT = GAMEBOARD.getContext("2d");
 
-const SQUARE_HEIGHT = 25
-const SQUARE_WIDTH = 25
+const UNIT_SIZE = 25;
 
-const CENTER = 225;
-
-
-console.log(gameBoard);
+console.log(GAMEBOARD);
 
 // snake
 
-const SNAKE_HEIGHT = 25;
-const SNAKE_WIDTH = 25;
+let snakePosition = { x: 25, y: 25 };
 
+CONTEXT.fillStyle = "purple";
 // first two are the x and y, second two are width and height
-context.fillRect(CENTER, CENTER, SNAKE_WIDTH, SNAKE_HEIGHT);
+CONTEXT.fillRect(snakePosition.x, snakePosition.y, UNIT_SIZE, UNIT_SIZE);
 
-document.addEventListener("keydown", (e) => {
-  const key = e.key;
-  if (key === "ArrowUp" || key === "w") {
-    console.log('up');
-  }``
-  if (key === "ArrowDown") {
-    console.log('down');
-  }
-  if (key === "ArrowLeft") {
-    console.log('left');
-  }
-  if (key === "ArrowRight") {
-    console.log('right');
-  }
-} )
+// food
 
-function game() {
-
+  //this works but needs to be multiples of 25 between 0 and 500
+function createFood(max, min) {
+  let randomX = Math.floor(Math.random() * (max - min) + min)
+  let randomY = Math.floor(Math.random() * (max - min) + min)
+  console.log(randomX);
+  CONTEXT.fillStyle = "yellow";
+  CONTEXT.fillRect(randomX, randomY, UNIT_SIZE, UNIT_SIZE);
+  
 }
 
-console.log('test');
+createFood(500, 0)
 
-// function inputDirection() {
-//   addEventListener
-// }
+// controls
+window.addEventListener("keydown", (e) => {
+  const key = e.key;
+  if (key === "ArrowUp" || key === "w") {
+    console.log("up");
+  }
+  ``;
+  if (key === "ArrowDown") {
+    console.log(snakePosition.x);
+  }
+  if (key === "ArrowLeft") {
+    console.log("left");
+  }
+  if (key === "ArrowRight") {
+    console.log("right");
+  }
+});
+
+// game loop
+
+function game() {}
+
+console.log("test");
