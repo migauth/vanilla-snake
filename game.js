@@ -17,22 +17,24 @@
 
 // basic game stuff
 
-const GAMEBOARD = document.getElementById("game-board");
-const CONTEXT = GAMEBOARD.getContext("2d");
+const gameBoard = document.getElementById("game-board");
+const context = gameBoard.getContext("2d");
 
-const UNIT_SIZE = 25;
+const unitSize = 25;
 
 let running = false;
 
-console.log(GAMEBOARD);
+console.log(gameBoard);
 
 // snake
 
+const snakeColour = 'purple'
+
 let snakePosition = { x: 25, y: 25 };
 
-CONTEXT.fillStyle = "purple";
+context.fillStyle = snakeColour;
 // first two are the x and y, second two are width and height
-CONTEXT.fillRect(snakePosition.x, snakePosition.y, UNIT_SIZE, UNIT_SIZE);
+context.fillRect(snakePosition.x, snakePosition.y, unitSize, unitSize);
 
 // food
 
@@ -41,8 +43,8 @@ function createFood(max, min) {
   let randomX = Math.floor(Math.random() * (max - min) + min)
   let randomY = Math.floor(Math.random() * (max - min) + min)
   console.log(randomX, randomY);
-  CONTEXT.fillStyle = "yellow";
-  CONTEXT.fillRect(randomX, randomY, UNIT_SIZE, UNIT_SIZE);
+  context.fillStyle = "yellow";
+  context.fillRect(randomX, randomY, unitSize, unitSize);
   
 }
 
@@ -68,7 +70,7 @@ window.addEventListener("keydown", (e) => {
 // game loop
 
 function clear() {
-  
+
 }
 
 function game() {
