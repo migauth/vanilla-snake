@@ -22,6 +22,8 @@ const CONTEXT = GAMEBOARD.getContext("2d");
 
 const UNIT_SIZE = 25;
 
+let running = false;
+
 console.log(GAMEBOARD);
 
 // snake
@@ -38,13 +40,12 @@ CONTEXT.fillRect(snakePosition.x, snakePosition.y, UNIT_SIZE, UNIT_SIZE);
 function createFood(max, min) {
   let randomX = Math.floor(Math.random() * (max - min) + min)
   let randomY = Math.floor(Math.random() * (max - min) + min)
-  console.log(randomX);
+  console.log(randomX, randomY);
   CONTEXT.fillStyle = "yellow";
   CONTEXT.fillRect(randomX, randomY, UNIT_SIZE, UNIT_SIZE);
   
 }
 
-createFood(500, 0)
 
 // controls
 window.addEventListener("keydown", (e) => {
@@ -66,6 +67,23 @@ window.addEventListener("keydown", (e) => {
 
 // game loop
 
-function game() {}
+function clear() {
+  
+}
+
+function game() {
+  running = true;
+  
+
+}
+
+function update() {
+  setTimeout (() =>  {
+    createFood(500, 0)
+  }, 1000)
+  
+}
+
+update()
 
 console.log("test");
