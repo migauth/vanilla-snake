@@ -24,7 +24,14 @@ const unitSize = 25;
 
 let running = false;
 
-console.log(gameBoard);
+let score = 0;
+
+console.log(score);
+
+// console.log(gameBoard);
+
+// gmae board
+const gameBoardColour = 'lightgrey'
 
 // snake
 
@@ -42,7 +49,7 @@ context.fillRect(snakePosition.x, snakePosition.y, unitSize, unitSize);
 function createFood(max, min) {
   let randomX = Math.floor(Math.random() * (max - min) + min)
   let randomY = Math.floor(Math.random() * (max - min) + min)
-  console.log(randomX, randomY);
+  // console.log(randomX, randomY);
   context.fillStyle = "yellow";
   context.fillRect(randomX, randomY, unitSize, unitSize);
   
@@ -54,38 +61,55 @@ window.addEventListener("keydown", (e) => {
   const key = e.key;
   if (key === "ArrowUp" || key === "w") {
     console.log("up");
+    snakePosition.y = snakePosition.y - 25
   }
   ``;
   if (key === "ArrowDown") {
-    console.log(snakePosition.x);
+    console.log("down");
+    snakePosition.y = snakePosition.y + 25
   }
   if (key === "ArrowLeft") {
     console.log("left");
+    snakePosition.x = snakePosition.x - 25
   }
   if (key === "ArrowRight") {
     console.log("right");
+    snakePosition.x = snakePosition.x + 25
   }
 });
 
 // game loop
 
 function clear() {
-
+  context.fillStyle = gameBoard
+  context.fillRect(0, 0, gameBoard.width, gameBoard.height)
 }
 
-function game() {
+function gameLoop() {
   running = true;
-  
-
 }
 
-function update() {
-  setTimeout (() =>  {
-    createFood(500, 0)
-  }, 1000)
+gameLoop()
+
+function updateGame() {
+  if (running) {
+    setTimeout (() =>  {
+      clear()
+      
+      context.fillStyle = snakeColour;
+      context.fillRect(snakePosition.x, snakePosition.y, unitSize, unitSize);
+      context.fillStyle = gameBoardColour;
+      // createFood(500, 0)
+      // this works for moving the snake
+      // snakePosition.x = snakePosition.x + 25
+      console.log(snakePosition.x);
+      updateGame()
   
+    }, 100)
+    
+  }
 }
 
-update()
+updateGame()
 
 console.log("test");
