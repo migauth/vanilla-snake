@@ -30,86 +30,94 @@ console.log(score);
 
 // console.log(gameBoard);
 
-// gmae board
-const gameBoardColour = 'lightgrey'
+// game board
+const gameBoardColour = "lightgrey";
 
 // snake
 
-const snakeColour = 'purple'
-
+const snakeColour = "purple";
 let snakePosition = { x: 25, y: 25 };
+let foodPosition = { x: 100, y: 100 }
 
-context.fillStyle = snakeColour;
-// first two are the x and y, second two are width and height
-context.fillRect(snakePosition.x, snakePosition.y, unitSize, unitSize);
+function snake() {
+
+  context.fillStyle = snakeColour;
+  // first two are the x and y, second two are width and height
+  context.fillRect(snakePosition.x, snakePosition.y, unitSize, unitSize);
+}
+
+// snake()
 
 // food
 
-  //this works but needs to be multiples of 25 between 0 and 500
-function createFood(max, min) {
-  let randomX = Math.floor(Math.random() * (max - min) + min)
-  let randomY = Math.floor(Math.random() * (max - min) + min)
-  // console.log(randomX, randomY);
-  context.fillStyle = "yellow";
-  context.fillRect(randomX, randomY, unitSize, unitSize);
-  
-}
+//this works but needs to be multiples of 25 between 0 and 500
+// function foodPosition() {
+//   let max = 500
+//   let min = 0
+//   let randomX = Math.floor(Math.random() * (max - min) + min);
+//   let randomY = Math.floor(Math.random() * (max - min) + min);
+//   // console.log(randomX, randomY);
+// }
 
+
+function drawFood(){
+  context.fillStyle = "yellow";
+  context.fillRect(foodPosition.x, foodPosition.y, unitSize, unitSize)
+}
 
 // controls
 window.addEventListener("keydown", (e) => {
   const key = e.key;
   if (key === "ArrowUp" || key === "w") {
     console.log("up");
-    snakePosition.y = snakePosition.y - 25
+    snakePosition.y = snakePosition.y - 25;
   }
   ``;
   if (key === "ArrowDown") {
     console.log("down");
-    snakePosition.y = snakePosition.y + 25
+    snakePosition.y = snakePosition.y + 25;
   }
   if (key === "ArrowLeft") {
     console.log("left");
-    snakePosition.x = snakePosition.x - 25
+    snakePosition.x = snakePosition.x - 25;
   }
   if (key === "ArrowRight") {
     console.log("right");
-    snakePosition.x = snakePosition.x + 25
+    snakePosition.x = snakePosition.x + 25;
   }
 });
 
 // game loop
 
 function clear() {
-  context.fillStyle = gameBoard
-  context.fillRect(0, 0, gameBoard.width, gameBoard.height)
+  context.fillStyle = gameBoardColour;
+  context.fillRect(0, 0, gameBoard.width, gameBoard.height);
 }
 
 function gameLoop() {
   running = true;
+  updateGame();
 }
-
-gameLoop()
 
 function updateGame() {
   if (running) {
-    setTimeout (() =>  {
-      clear()
+    setTimeout(() => {
+      clear();
+      drawFood()
+      snake()
       
-      context.fillStyle = snakeColour;
-      context.fillRect(snakePosition.x, snakePosition.y, unitSize, unitSize);
-      context.fillStyle = gameBoardColour;
-      // createFood(500, 0)
-      // this works for moving the snake
-      // snakePosition.x = snakePosition.x + 25
+
       console.log(snakePosition.x);
-      updateGame()
-  
-    }, 100)
-    
+      updateGame();
+    }, 100);
+  }
+  if (snakePosition.x && snakePosition.y === foodPosition.x && foodPosition.y) {
+    console.log('yumyum');
   }
 }
 
-updateGame()
+gameLoop();
+
 
 console.log("test");
+
