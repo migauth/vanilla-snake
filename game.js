@@ -51,13 +51,16 @@ function snake() {
 // food
 
 //this works but needs to be multiples of 25 between 0 and 500
-// function foodPosition() {
-//   let max = 500
-//   let min = 0
-//   let randomX = Math.floor(Math.random() * (max - min) + min);
-//   let randomY = Math.floor(Math.random() * (max - min) + min);
-//   // console.log(randomX, randomY);
-// }
+function foodPositionCalc() {
+  let max = 20
+  let min = 0
+  let randomX = Math.floor(Math.random() * (max - min)) * 25 ;
+  let randomY = Math.floor(Math.random() * (max - min)) * 25 ;
+  // console.log(randomX, randomY);
+  return [randomX, randomY]
+}
+
+console.log('food x', foodPosition.x, 'food y', foodPosition.y);
 
 
 function drawFood(){
@@ -96,24 +99,35 @@ function clear() {
 
 function gameLoop() {
   running = true;
+  
   updateGame();
 }
 
 function updateGame() {
+  
   if (running) {
+    if (snakePosition.x && snakePosition.y === foodPosition.x && foodPosition.y) {
+      console.log('yumyum');
+      let positions = foodPositionCalc()
+      console.log(positions);
+      foodPosition.x = positions[0]
+      foodPosition.y = positions[1]
+      console.log('food x', foodPosition.x, 'food y', foodPosition.y);
+      score = score + 1
+    }
     setTimeout(() => {
       clear();
       drawFood()
       snake()
       
-
-      console.log(snakePosition.x);
       updateGame();
+      console.log('snake x', snakePosition.x, 'food y', snakePosition.y);
+      console.log('food x', foodPosition.x, 'food y', foodPosition.y);
+      console.log('score', score);
+
     }, 100);
   }
-  if (snakePosition.x && snakePosition.y === foodPosition.x && foodPosition.y) {
-    console.log('yumyum');
-  }
+  
 }
 
 gameLoop();
