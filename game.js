@@ -27,7 +27,6 @@ let running = false;
 let score = 0;
 const scoreNum = document.getElementById("scoreNum");
 
-
 console.log(score);
 
 // game board
@@ -47,9 +46,9 @@ function snake() {
   context.fillStyle = snakeColour;
   // first two are the x and y, second two are width and height
   context.fillRect(snakePosition.x, snakePosition.y, unitSize, unitSize);
-  if (snakeLength === 2) {
-    context.fillRect(snakePosition.x - 25, snakePosition.y - 25, unitSize, unitSize);
-  }
+  // if (snakeLength === 2) {
+  //   context.fillRect(snakePosition.x - 25, snakePosition.y - 25, unitSize, unitSize);
+  // }
 }
 
 
@@ -81,7 +80,6 @@ window.addEventListener("keydown", (e) => {
     console.log("up");
     snakePosition.y = snakePosition.y - 25;
   }
-  ``;
   if (key === "ArrowDown") {
     console.log("down");
     snakePosition.y = snakePosition.y + 25;

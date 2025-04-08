@@ -1,19 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Snake Game</title>
-  <link href="style.css" rel="stylesheet"></link>
-</head>
-<body>
-  <!-- Can use a div here with an id indtead of canvas, or canvas -->
-   <div>
-    <canvas width="500" height="500" id="game-board"></canvas>
-   </div>
-   <div id="score">score: <span id="scoreNum"></span> </div>
-   <button id="reset">reset</button>
-</body>
-<script src="game.js">  
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game</title>
+    <!-- <link href="style.css" rel="stylesheet"></link> -->
+    <style>
+      body {
+        background-color: black;
+        height: 100vh;
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #game-board {
+        background-color: lightgrey;
+      }
+
+      #score {
+        color: yellow;
+        padding-top: 10px;
+        font-size: 200%;
+      }
+
+      #reset {
+        color: white;
+        background-color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Can use a div here with an id indtead of canvas, or canvas -->
+    <div>
+      <canvas width="500" height="500" id="game-board"></canvas>
+      <div id="score">score: <span id="scoreNum"></span></div>
+      <button id="reset">reset</button>
+    </div>
+  </body>
+  <script src="game.js"></script>
 </html>
