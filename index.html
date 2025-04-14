@@ -68,6 +68,8 @@
     let score = 0;
     const scoreNum = document.getElementById("scoreNum");
     const scoreDiv = document.getElementById("score");
+    
+    let direciton = ''
 
     console.log(score);
 
@@ -77,11 +79,17 @@
 
     // snake
 
-    let snakeLength = 2;
+    let snakeLength = 5;
 
     const snakeColour = "purple";
-    let snakePart = { x:unitSize * snakeLength, y:0 };
-    let snake = [{ x: 0, y: 0 }, {x: unitSize, y: 0}, snakePart];
+    let snakePart = { x:unitSize, y:0 };
+    let snake = [{ x: 0, y: 0 }, {x: unitSize, y: 0}, snakePart ];
+
+    for (let i = 0; i < snakeLength; i++) {
+      snake.push(snakePart)
+      
+    }
+    console.log(snake);
 
     function snakeBody() {
       // first two are the x and y, second two are width and height
@@ -130,25 +138,30 @@
     function changeDirection(e) {
       const keyPress = e.key;
       if (keyPress === "ArrowUp" || keyPress === "w") {
-        console.log("up");
+        console.log(direciton);
         snake.y = snake.y - 25;
+        direciton = 'up'
       }
       if (keyPress === "ArrowDown") {
-        console.log("down");
+        console.log(direciton);
         snake.y = snake.y + 25;
+        direciton = 'down'
       }
       if (keyPress === "ArrowLeft") {
-        console.log("left");
+        console.log(direciton);
         snake.x = snake.x - 25;
+        direciton = 'left'
       }
       if (keyPress === "ArrowRight") {
-        console.log("right");
+        console.log(direciton);
         snake.x = snake.x + 25
-        // moveRight();
+        direciton = 'right'
       }
     }
 
     window.addEventListener("keydown", changeDirection);
+
+    
 
 
     // clear game screen
@@ -199,7 +212,16 @@
           clear();
           drawFood();
           snakeBody();
-          snake.forEach((element) => {element.x = element.x + 25})
+          if (direciton === 'up') {
+            snake.forEach((element) => {element.y = element.y - 25})
+          } else if (direciton === 'right') {
+            snake.forEach((element) => {element.x = element.x + 25})
+          } else if (direciton === 'left') {
+            snake.forEach((element) => {element.x = element.x - 25})
+          } else if (direciton === 'down') {
+            snake.forEach((element) => {element.y = element.y + 25})
+          }
+          // snake.forEach((element) => {element.x = element.x + 25})
           scoreNum.innerText = score;
           updateGame();
         }, 100);
