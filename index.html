@@ -71,16 +71,16 @@
 
     let direciton = "";
 
-    let xVelocity = unitSize;
-    let yVelocity = 0;
-
     console.log(score);
 
     // game board
 
     const gameBoardColour = "lightgrey";
 
-    // snake
+    // snake and movement
+
+    let xVelocity = unitSize;
+    let yVelocity = 0;
 
     const snakeColour = "purple";
     let snake = [
@@ -138,9 +138,11 @@
       const keyPress = e.key;
       if (keyPress === "ArrowUp" || keyPress === "w") {
         yVelocity = -unitSize;
+        xVelocity = 0
       }
       if (keyPress === "ArrowDown") {
         yVelocity = unitSize;
+        xVelocity = 0
       }
       if (keyPress === "ArrowLeft") {
         xVelocity = -unitSize;
