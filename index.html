@@ -15,19 +15,10 @@
         justify-content: center;
       }
 
-      #game-board {
-        background-color: lightgrey;
-      }
-
       #score {
         color: yellow;
         padding-top: 10px;
         font-size: 200%;
-      }
-
-      #reset {
-        color: white;
-        background-color: black;
       }
     </style>
   </head>
@@ -59,6 +50,7 @@
     let direciton = "";
 
     const start = document.getElementById("start");
+    let gameStart = false;
 
     // game board
 
@@ -144,7 +136,8 @@
     window.addEventListener("keydown", changeDirection);
 
     start.addEventListener("click", function () {
-      console.log("start pressed");
+      console.log("start pressed", gameStart);
+      gameStart = true;
     });
 
     // clear game screen
@@ -163,11 +156,11 @@
 
     const gameOver = () => {
       running = false;
-          scoreDiv.innerText = "game over";
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
-    }
+      scoreDiv.innerText = "game over";
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    };
 
     function updateGame() {
       console.log(snake[0].x, snake[0].y);
@@ -176,34 +169,32 @@
         // when snake eats food
         if (snake[0].x === foodPosition.x && snake[0].y === foodPosition.y) {
           console.log("yumyum");
+          //reposition food
           let positions = foodPositionCalc();
           foodPosition.x = positions[0];
           foodPosition.y = positions[1];
           score = score + 1;
+          //add to snake
           snake.push({ x: unitSize * snakeLength, y: 0 });
           snakeLength = snakeLength + 1;
+          //increase speed
           gameSpeed = gameSpeed - 10;
+          console.log(gameSpeed);
         }
+        //game overs
         // out of bounds
         if (snake[0].x < -25 || snake[0].x > 500) {
-          running = false;
-          scoreDiv.innerText = "game over";
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
+          gameOver();
         } else if (snake[0].y < -25 || snake[0].y > 500) {
-          running = false;
-          scoreDiv.innerText = "game over";
-          setTimeout(() => {
-            location.reload();
-          }, 2000);
+          gameOver();
         }
+        //check if snake touches
         for (let i = 1; i < snake.length; i++) {
           const snakePart = snake[i];
           console.log(snakePart);
           if (snake[0].x === snakePart.x && snake[0].y === snakePart.y) {
             console.log("dead");
-            gameOver()
+            gameOver();
           }
         }
 
