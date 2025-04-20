@@ -20,11 +20,16 @@
         padding-top: 10px;
         font-size: 200%;
       }
+
+      #game-board {
+        border:solid red 5px;
+      }
+
     </style>
   </head>
   <body>
     <!-- Can use a div here with an id indtead of canvas, or canvas -->
-    <div>
+    <div class="container">
       <canvas width="500" height="500" id="game-board"></canvas>
       <div id="score">score: <span id="scoreNum"></span></div>
       <button id="start">start</button>
@@ -50,7 +55,16 @@
     let direciton = "";
 
     const start = document.getElementById("start");
-    let gameStart = false;
+
+    // let gameStart = false;
+
+    start.addEventListener("click", function () {
+      if (!running) {
+      console.log("start pressed", running);
+      running = true;
+      updateGame()
+      }
+    });
 
     // game board
 
@@ -94,8 +108,7 @@
 
     // food
 
-    // food starting point
-    let foodPosition = { x: 100, y: 100 };
+    let foodPosition = { x: (Math.floor(Math.random() * (20 - 0)) * 25), y: (Math.floor(Math.random() * (20 - 0)) * 25) };
 
     function foodPositionCalc() {
       let max = 20;
@@ -135,23 +148,11 @@
 
     window.addEventListener("keydown", changeDirection);
 
-    start.addEventListener("click", function () {
-      console.log("start pressed", gameStart);
-      gameStart = true;
-    });
-
     // clear game screen
+
     function clear() {
       context.fillStyle = gameBoardColour;
       context.fillRect(0, 0, gameBoard.width, gameBoard.height);
-    }
-
-    // game loop
-
-    function gameLoop() {
-      running = true;
-
-      updateGame();
     }
 
     const gameOver = () => {
@@ -162,9 +163,9 @@
       }, 2000);
     };
 
-    function updateGame() {
-      // console.log(snake[0].x, snake[0].y);
+    // game loop
 
+    function updateGame() {
       if (running) {
         // when snake eats food
         if (snake[0].x === foodPosition.x && snake[0].y === foodPosition.y) {
@@ -191,7 +192,6 @@
         //check if snake touches
         for (let i = 1; i < snake.length; i++) {
           const snakePart = snake[i];
-          console.log(snakePart);
           if (snake[0].x === snakePart.x && snake[0].y === snakePart.y) {
             console.log("dead");
             gameOver();
@@ -208,7 +208,7 @@
         }, gameSpeed);
       }
     }
-
-    gameLoop();
+    
+    // gameLoop();
   </script>
 </html>
