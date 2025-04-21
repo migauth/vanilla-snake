@@ -8,11 +8,11 @@
     <style>
       body {
         background-color: darkslategrey;
-        height: 100vh;
-        width: auto;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
       }
 
       #score {
@@ -22,17 +22,33 @@
       }
 
       #game-board {
-        border:solid red 5px;
+        border: solid red 5px;
+      }
+
+      #title {
+        color: yellow;
+      }
+
+      #start {
+        color: yellow;
+        background-color: black;
+        font-size: larger;
+      }
+
+      #scoreNum {
+        color:chartreuse;
       }
 
     </style>
   </head>
   <body>
-    <!-- Can use a div here with an id indtead of canvas, or canvas -->
     <div class="container">
-      <canvas width="500" height="500" id="game-board"></canvas>
+      <div id="start-screen">
+        <h1 id="title">SNAKE GAME</h1>
+        <canvas width="500" height="500" id="game-board"></canvas>
+      </div>
       <div id="score">score: <span id="scoreNum"></span></div>
-      <button id="start">start</button>
+      <button id="start">Start Game</button>
     </div>
   </body>
   <script>
@@ -42,6 +58,8 @@
 
     const gameBoard = document.getElementById("game-board");
     const context = gameBoard.getContext("2d");
+
+    const startScreen = document.getElementById('start-screen')
 
     const unitSize = 25;
 
@@ -56,21 +74,39 @@
 
     const start = document.getElementById("start");
 
-    // let gameStart = false;
+    // start game
 
     start.addEventListener("click", function () {
       if (!running) {
-      console.log("start pressed", running);
-      running = true;
-      updateGame()
+        running = true;
+        updateGame();
       }
     });
+
+    //title snake head
+
+    context.fillStyle = 'black'
+    context.fillRect(200, 175, 100, 100)
+    context.fillStyle = 'purple'
+    context.fillRect(210, 185, 80, 80)
+    context.fillStyle = 'yellow'
+    context.fillRect(224, 210, 10, 10)
+    context.fillStyle = 'yellow'
+    context.fillRect(266, 210, 10, 10)
+    context.fillStyle = 'black'
+    context.fillRect(240, 230, 5, 5)
+    context.fillStyle = 'black'
+    context.fillRect(255, 230, 5, 5)
+    context.fillStyle = 'red'
+    context.fillRect(245, 250, 10, 50)
+    context.fillStyle = 'black'
+    context.fillRect(240, 250, 20, 4)
 
     // game board
 
     const gameBoardColour = "lightgrey";
 
-    // snake and movement
+    // snake and snake movement
 
     let xVelocity = unitSize;
     let yVelocity = 0;
@@ -108,7 +144,10 @@
 
     // food
 
-    let foodPosition = { x: (Math.floor(Math.random() * (20 - 0)) * 25), y: (Math.floor(Math.random() * (20 - 0)) * 25) };
+    let foodPosition = {
+      x: Math.floor(Math.random() * (20 - 0)) * 25,
+      y: Math.floor(Math.random() * (20 - 0)) * 25,
+    };
 
     function foodPositionCalc() {
       let max = 20;
@@ -208,7 +247,7 @@
         }, gameSpeed);
       }
     }
-    
+
     // gameLoop();
   </script>
 </html>
