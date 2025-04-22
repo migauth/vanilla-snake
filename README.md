@@ -1,0 +1,1 @@
+https://migauth.github.io/vanilla-snake/
