@@ -215,7 +215,7 @@
           foodPosition.y = positions[1];
           score = score + 1;
           //add to snake
-          snake.push({ x: unitSize * snakeLength, y: 0 });
+          snake.push({ x: -25, y: -25 });
           snakeLength = snakeLength + 1;
           //increase speed
           gameSpeed = gameSpeed - 10;
@@ -247,7 +247,5 @@
         }, gameSpeed);
       }
     }
-
-    // gameLoop();
   </script>
 </html>
